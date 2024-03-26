@@ -29,5 +29,17 @@ namespace user_app.Controllers
             return SingleResult.Create(result);
         }
 
+        public async Task<IHttpActionResult> Post(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            db.Users.Add(user);
+            await db.SaveChangesAsync();
+            return Created(new { User = user, ModelState = ModelState });
+        }
+
+
     }
 }
