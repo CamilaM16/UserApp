@@ -39,7 +39,6 @@ namespace user_app.Controllers
             await db.SaveChangesAsync();
             return Created(new { User = user, ModelState = ModelState });
         }
-
         public async Task<IHttpActionResult> Patch([FromODataUri] Guid key, Delta<User> user)
         {
             if (!ModelState.IsValid)
@@ -97,10 +96,20 @@ namespace user_app.Controllers
             }
             return Updated(update);
         }
-
         private bool UserExists(Guid key)
         {
             return db.Users.Any(u => u.Id == key);
+        }
+        public async Task<IHttpActionResult> Delete([FromODataUri] Guid key)
+        {
+            var product = await db.Users.FindAsync(key);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            db.Users.Remove(product);
+            await db.SaveChangesAsync();
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }
