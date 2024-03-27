@@ -7,10 +7,12 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using user_app.Models;
 
 namespace user_app.Controllers
 {
+    [EnableCors(origins: "http://localhost:8080", headers: "*", methods: "*")]
     public class UsersController : ODataController
     {
         readonly UsersContext db = new UsersContext();

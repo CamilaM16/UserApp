@@ -12,8 +12,11 @@ namespace user_app
     {
         public static void Register(HttpConfiguration config)
         {
+            config.EnableCors();
             ODataModelBuilder builder = new ODataConventionModelBuilder();
-            builder.EntitySet<User>("Users");
+            builder.EntitySet<User>("Users")
+                .EntityType.Select().Filter().OrderBy().Expand().Count();
+            
             config.MapODataServiceRoute(
                 routeName: "ODataRoute",
                 routePrefix: null,
