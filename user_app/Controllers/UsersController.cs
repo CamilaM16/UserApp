@@ -12,7 +12,7 @@ using user_app.Models;
 
 namespace user_app.Controllers
 {
-    [EnableCors(origins: "http://localhost:8080", headers: "*", methods: "*")]
+    //[EnableCors(origins: "", headers: "*", methods: "*")]
     public class UsersController : ODataController
     {
         readonly UsersContext db = new UsersContext();
@@ -31,15 +31,17 @@ namespace user_app.Controllers
             return SingleResult.Create(result);
         }
 
-        public async Task<IHttpActionResult> Post(User user)
+        public async Task<IHttpActionResult> Post([FromBody] User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            user.Id = Guid.NewGuid();
+
             db.Users.Add(user);
             await db.SaveChangesAsync();
-            return Created(new { User = user, ModelState = ModelState });
+            return Created(user);
         }
         public async Task<IHttpActionResult> Patch([FromODataUri] Guid key, Delta<User> user)
         {
