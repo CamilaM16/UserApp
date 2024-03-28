@@ -12,7 +12,6 @@ using user_app.Models;
 
 namespace user_app.Controllers
 {
-    //[EnableCors(origins: "", headers: "*", methods: "*")]
     public class UsersController : ODataController
     {
         readonly UsersContext db = new UsersContext();
@@ -67,7 +66,7 @@ namespace user_app.Controllers
                 }
                 else
                 {
-                    throw;
+                    return Conflict();
                 }
             }
             return Updated(entity);
@@ -95,7 +94,7 @@ namespace user_app.Controllers
                 }
                 else
                 {
-                    throw;
+                    return Conflict();
                 }
             }
             return Updated(update);
@@ -104,6 +103,7 @@ namespace user_app.Controllers
         {
             return db.Users.Any(u => u.Id == key);
         }
+
         public async Task<IHttpActionResult> Delete([FromODataUri] Guid key)
         {
             var product = await db.Users.FindAsync(key);

@@ -272,7 +272,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UsersContext.cs" />
+    <Compile Include="Models\UsersContext.cs">
+      <BrowseToURL>https://localhost:44341</BrowseToURL>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -303,7 +305,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50257</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44341/</IISUrl>
+          <IISUrl>http://localhost:44341/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:44341/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
