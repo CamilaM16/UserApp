@@ -36,5 +36,6 @@ namespace user_app.Models
         [StringLength(255)]
         [Column(TypeName = "nchar")]
         public string LastName { get; set; }
+        public object Name { get; set; }
     }
 }
