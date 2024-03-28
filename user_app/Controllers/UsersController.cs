@@ -14,7 +14,7 @@ namespace user_app.Controllers
 {
     public class UsersController : ODataController
     {
-        readonly UsersContext db = new UsersContext();
+        public UsersContext db = new UsersContext();
 
         [HttpGet]
         [EnableQuery]
